@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - BOLT
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Screw
+  - RedStick
+  - PinkStick
+  - BrownStick
+  - GrayStick
+  - BlueStick
+  - GreenStick
+  - Hole
+  - Base
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: UI-1
+    uniqueID: 3331410399
+    locked: 0
+  - name: UI-2
+    uniqueID: 1600128341
+    locked: 0
+  - name: UI-3
+    uniqueID: 3692618089
+    locked: 0
+  - name: UI-4
+    uniqueID: 1080702699
+    locked: 0
+  - name: UI-5
+    uniqueID: 1876330277
+    locked: 0
