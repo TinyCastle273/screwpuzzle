@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223270592685",
+    "project_id": "screw-puzzle-855c4",
+    "storage_bucket": "screw-puzzle-855c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223270592685:android:3152c6111fae25f0e9e624",
+        "android_client_info": {
+          "package_name": "com.tinycastle.screwpuzzleoriginal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD91R8D2qJFUZEICFQE75tkYUXkES0HV8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

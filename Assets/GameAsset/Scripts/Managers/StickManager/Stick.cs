@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,12 @@ public class Stick : MonoBehaviour
     public bool getStatus()
     {
         return isDestroyed;
+    }
+
+    public void setDestroyed(bool destroyed)
+    {
+        isDestroyed = destroyed;
+        gameObject.SetActive(false);
     }
 
 }

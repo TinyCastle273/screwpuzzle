@@ -25,20 +25,29 @@ public partial class GM
         if (!primaryLock)
         {
             primaryLock = true;
-            // InitializeSecondary();
+            InitializeSecondary();
         }
 
         if (!secondaryLock)
         {
-            secondaryLock = true;            
+            secondaryLock = true;
             EndInitialize(true);
         }
+
+        _loadingScreen.RequestLoad(beforeOutAction: () =>
+        {
+            RequestGoTo(Screen.MENU, true);
+        });
+
 
     }
 
     protected override void EndInitializationBehavior()
     {
         // After Initialization
+        var pref = _playerManager.GetPreference();
+        AudioManager.SetMusicVolume(pref.MusicVolume > 0 ? 0.5f : 0f);
+        AudioManager.SetSfxVolume(pref.SfxVolume > 0 ? 0.5f : 0f);
 
     }
 
@@ -46,4 +55,10 @@ public partial class GM
     {
         _primaryManagers.ForEach(x => x.Initialize());
     }
+
+    private void InitializeSecondary()
+    {
+        _secondaryManagers.ForEach(x => x.Initialize());
+    }
+
 }

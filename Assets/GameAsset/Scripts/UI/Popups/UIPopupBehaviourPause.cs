@@ -12,7 +12,7 @@ public class UIPopupBehaviourPause : UIPopupBehaviour
 
     public void OnHomeButton()
     {
-        GM.Instance.MainGame.ReturnMainMenu();
+        GM.Instance.RequestGoToMenu();
 
         Popup.Hide();
     }

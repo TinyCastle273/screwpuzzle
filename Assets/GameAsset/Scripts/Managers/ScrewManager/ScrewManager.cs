@@ -1,9 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
+
+public enum PlayState
+{
+    NORMAL = 0,
+    DRILL,
+    HAMMER
+}
 
 public partial class ScrewManager
 {
@@ -13,6 +18,20 @@ public partial class ScrewManager
 
     private Hole selectedHole;
     private GameObject currentScrew;
+
+    public PlayState _currentState
+    {
+        get;
+        set;
+    }
+
+    public static ScrewManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        _currentState = PlayState.NORMAL;
+    }
 
     private void Update()
     {
@@ -49,8 +68,6 @@ public partial class ScrewManager
 
     private void OnPlayerClicked()
     {
-
-
 #if UNITY_ANDROID
         if (Input.touchCount > 0)
         {
@@ -79,133 +96,208 @@ public partial class ScrewManager
 
     private void inputHandle(RaycastHit2D hit)
     {
-        if (hit.collider != null)
+        if (_currentState == PlayState.NORMAL)
         {
-            // Log
-            Log.Info($"{hit.collider.name}");
-
-            Screw screw = hit.collider.GetComponent<Screw>();
-            Hole hole = hit.collider.GetComponent<Hole>();
-            Stick stick = hit.collider.GetComponent<Stick>();
-
-            // Just found stick
-            if (stick is not null)
+            if (hit.collider != null)
             {
-                return;
-            }
+                // Log
+                Log.Info($"{hit.collider.name}");
 
-            // Found Stick, selected Screw
-            if (stick is not null && currentScrew is not null)
-            {
-                Log.Info("Found stick, reset state");
+                Screw screw = hit.collider.GetComponent<Screw>();
+                Hole hole = hit.collider.GetComponent<Hole>();
+                Stick stick = hit.collider.GetComponent<Stick>();
 
-                // Reset screw state
-                Screw selectedScrew = currentScrew.GetComponent<Screw>();
-                selectedScrew.stay();
-
-                currentScrew = null;
-                return;
-            }
-
-            // Found screw
-            if (screw is not null && currentScrew is null)
-            {
-                Log.Info($"Found Screw: {screw}");
-
-                // Save screw
-                currentScrew = screw.getScrew();
-                //selectedHole = currentScrew.transform.GetComponentInParent<Hole>();
-                screw.screwSelected();
-
-                return;
-            }
-
-            // Found screw, already has screw selected
-            if (screw != null && currentScrew != null)
-            {
-                Log.Info("Invalid hole, selected hole already busy");
-
-                // Reset screw state
-                /// temporary
-                screw.stay();
-                currentScrew.GetComponent<Screw>().stay();
-                currentScrew = null;
-
-                return;
-            }
-
-            // Found hole, selected screw, move screw
-            if (hole is not null && currentScrew is not null)
-            {
-                if (hole.GetScrewInSlot() is not null)
+                // Just found stick
+                if (stick is not null)
                 {
-                    Log.Info("Selected hole already has screw");
+                    return;
+                }
+
+                // Found Stick, selected Screw
+                if (stick is not null && currentScrew is not null)
+                {
+                    Log.Info("Found stick, reset state");
 
                     // Reset screw state
                     Screw selectedScrew = currentScrew.GetComponent<Screw>();
                     selectedScrew.stay();
 
                     currentScrew = null;
-                }
-                else
-                {
-                    Log.Info($"Found empty hole, move screw {screw} to hole {hole}");
-                    // Temporary
-                    currentScrew.GetComponent<Screw>().setEndPosition(hole);
-                    //currentScrew.transform.position = hole.transform.position;
-                    //currentScrew.transform.SetParent(hole.transform);
-                    hole.SetScrewToSlot(currentScrew);
-
-                    // Clear save
-                    currentScrew = null;
-                    if (selectedHole is not null)
-                        selectedHole.ClearSlot();
-
-                    // Save hole
-                    selectedHole = hole;
+                    return;
                 }
 
-                return;
-            }
-
-            // Found hole, no screw selected
-            if (hole is not null && currentScrew is null)
-            {
-                if (hole.GetScrewInSlot() is not null)
+                // Found screw
+                if (screw is not null && currentScrew is null)
                 {
-                    Log.Info($"Found hole, hole has screw");
+                    Log.Info($"Found Screw: {screw}");
 
                     // Save screw
-                    currentScrew = hole.GetScrewInSlot();
-                    screw = currentScrew.GetComponent<Screw>();
+                    currentScrew = screw.getScrew();
+                    //selectedHole = currentScrew.transform.GetComponentInParent<Hole>();
                     screw.screwSelected();
-                    selectedHole = hole;
+
+                    return;
+                }
+
+                // Found screw, already has screw selected
+                if (screw != null && currentScrew != null)
+                {
+                    Log.Info("Invalid hole, selected hole already busy");
+
+                    // Reset screw state
+                    /// temporary
+                    screw.stay();
+                    currentScrew.GetComponent<Screw>().stay();
+                    currentScrew = null;
+
+                    return;
+                }
+
+                // Found hole, selected screw, move screw
+                if (hole is not null && currentScrew is not null)
+                {
+                    if (hole.GetScrewInSlot() is not null)
+                    {
+                        Log.Info("Selected hole already has screw");
+
+                        // Reset screw state
+                        Screw selectedScrew = currentScrew.GetComponent<Screw>();
+                        selectedScrew.stay();
+
+                        currentScrew = null;
+                    }
+                    else
+                    {
+                        Log.Info($"Found empty hole, move screw {screw} to hole {hole}");
+
+                        // Temporary
+                        currentScrew.GetComponent<Screw>().setEndPosition(hole);
+                        //currentScrew.transform.position = hole.transform.position;
+                        //currentScrew.transform.SetParent(hole.transform);
+                        hole.SetScrewToSlot(currentScrew);
+
+                        // Clear save
+                        currentScrew = null;
+                        if (selectedHole is not null)
+                            selectedHole.ClearSlot();
+
+                        // Save hole
+                        selectedHole = hole;
+                    }
+
+                    return;
+                }
+
+                // Found hole, no screw selected
+                if (hole is not null && currentScrew is null)
+                {
+                    if (hole.GetScrewInSlot() is not null)
+                    {
+                        Log.Info($"Found hole, hole has screw");
+
+                        // Save screw
+                        currentScrew = hole.GetScrewInSlot();
+                        screw = currentScrew.GetComponent<Screw>();
+                        screw.screwSelected();
+                        selectedHole = hole;
+                    }
+                    else
+                    {
+                        Log.Info("Hole is empty");
+                        // Play SFX
+
+                    }
+
+                    return;
+                }
+
+            }
+            else
+            {
+                Log.Warn("Hit nothing");
+
+                // Invalid hole selected
+                if (currentScrew != null)
+                {
+                    Log.Info("Keep selelected screw idle");
+
+                    // Reset screw state
+                    Screw screw = currentScrew.GetComponent<Screw>();
+                    screw.stay();
+
+                    currentScrew = null;
+                }
+            }
+        }
+
+        // Perform super power DRILL
+        if (_currentState == PlayState.DRILL)
+        {
+            if (hit.collider != null)
+            {
+                Log.Info($"{hit.collider.name}");
+
+                Screw screw = hit.collider.GetComponent<Screw>();
+
+                if (screw != null)
+                {
+                    screw.gameObject.SetActive(false);
+
+                    AudioManager.Instance.PlaySFX(PowerUpSounds.Drill);
+
+                    _currentState = PlayState.NORMAL;
+
+                    Hole hole = hit.collider.GetComponent<Hole>();
+                    if (hole != null)
+                    {
+                        var s = hole.GetScrewInSlot();
+
+                        if (s == screw)
+                        {
+                            hole.ClearSlot();
+                        }
+                    }
                 }
                 else
                 {
-                    Log.Info("Hole is empty");
-                    // Play SFX
+                    Hole hole = hit.collider.GetComponent<Hole>();
+                    if (hole != null)
+                    {
+                        var s = hole.GetScrewInSlot();
 
+                        if (s != null)
+                        {
+                            s.SetActive(false);
+                            hole.ClearSlot();
+                        }
+                    }
+                    else
+                    {
+                        Log.Info($"No screw found");
+                    }
                 }
-
-                return;
             }
-
         }
-        else
+
+        // Perform super power HAMMER
+        if (_currentState == PlayState.HAMMER)
         {
-            Log.Warn("Hit nothing");
-
-            // Invalid hole selected
-            if (currentScrew != null)
+            if (hit.collider != null)
             {
-                Log.Info("Keep selelected screw idle");
+                Log.Info($"{hit.collider.name}");
 
-                // Reset screw state
-                Screw screw = currentScrew.GetComponent<Screw>();
-                screw.stay();
+                Stick stick = hit.collider.GetComponent<Stick>();
 
-                currentScrew = null;
+                if (stick == null)
+                {
+                    Log.Info($"No stick found");
+                }
+                else
+                {
+                    stick.setDestroyed(true);
+                    AudioManager.Instance.PlaySFX(PowerUpSounds.Drill);
+                    _currentState = PlayState.NORMAL;
+                }
             }
         }
     }

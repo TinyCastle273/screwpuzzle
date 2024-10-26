@@ -125,15 +125,15 @@ public partial class AudioManager
         switch (_sfx)
         {
             case PowerUpSounds.Return:
-                s = sfx[0];
+                s = powerUpSfx[0];
                 break;
 
             case PowerUpSounds.Replay:
-                s = sfx[1];
+                s = powerUpSfx[1];
                 break;
 
             case PowerUpSounds.Drill:
-                s = sfx[2];
+                s = powerUpSfx[2];
                 break;
         }
 

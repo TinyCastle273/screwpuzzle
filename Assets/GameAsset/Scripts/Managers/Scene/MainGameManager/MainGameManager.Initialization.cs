@@ -10,10 +10,13 @@ public partial class MainGameManager : MonoManagerBase
     protected override void EndInitializationBehavior()
     {
         // 
+        //GM.Instance.Player.GetLevelState("" + currentLevelIndex, out var completion);
+
     }
 
     protected override void StartInitializationBehavior()
     {
+        gameObject.SetActive(false);
         EndInitialize(true);
     }
 }

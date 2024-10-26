@@ -24,7 +24,9 @@ public class LoadingScreen : MonoBehaviour
     private Action _beforeOutAction;
     private Action _completeAction;
 
-    public bool Active;
+    private float _progress = 0f;
+
+    public bool Active => gameObject.activeSelf;
 
     private void Awake()
     {
@@ -90,7 +92,7 @@ public class LoadingScreen : MonoBehaviour
     {
         _loadState = LoadState.TRANSIT_IN;
 
-        _slider.value = 0f;
+        _slider.value = _progress = 0f;
 
         ConcludeTransitIn();
     }
@@ -109,8 +111,9 @@ public class LoadingScreen : MonoBehaviour
 
     private void UpdateProgressBar(out bool isDone)
     {
-        _slider.value = 1f;
-        isDone = true;
+        _progress += 0.01f;
+        _slider.value += _progress;
+        isDone = _progress >= 1;
     }
 
     private void OnLoadingDone()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,14 @@ public partial class MainMenu: MonoManagerBase
 
     protected override void EndInitializationBehavior()
     {
-        //
-        gameObject.SetActive(false);
+        var coins = "" + GM.Instance.Player.GetResource(GlobalConstants.COINS_RESOURCE);
+        SetCoinText(coins);
     }
 
     protected override void StartInitializationBehavior()
     {
-        
+
+        gameObject.SetActive(false);
         EndInitialize(true);
     }
-
 }

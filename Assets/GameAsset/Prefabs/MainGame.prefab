@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685519904086764770}
+  - component: {fileID: 8493485457808798612}
   m_Layer: 5
   m_Name: MainGameHud
   m_TagString: Untagged
@@ -37,6 +38,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0.00012207}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8493485457808798612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213451336166500785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442fb6fa757bc114688941652911e551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelText: {fileID: 8975458645654516672}
+  _coinsText: {fileID: 2565669090322132786}
+  _powerUpButtons:
+  - {fileID: 8438757461112291629}
+  - {fileID: 5132649789909793769}
+  - {fileID: 2919618497096607303}
+  - {fileID: 782594502534640335}
 --- !u!1 &457463323351162045
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +220,8 @@ GameObject:
   - component: {fileID: 1443260865279762886}
   - component: {fileID: 8845689462333153961}
   - component: {fileID: 4328180599364249607}
+  - component: {fileID: 5132649789909793769}
+  - component: {fileID: 2755715223544498162}
   m_Layer: 5
   m_Name: PowerUpButton2
   m_TagString: Untagged
@@ -308,6 +330,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5132649789909793769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613805141600235028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a3f9fe43427594197630ca8804aa2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerType: 1
+  _powerPrice: 18
+  _powerImg: {fileID: 21300000, guid: 1db0b5c237331c04d9151d6bce6095dd, type: 3}
+  _powerName: {fileID: 21300000, guid: 6815f358eb64e4b4483f8432df80c5b3, type: 3}
+  _unlocked: 0
+  _levelToUnlock: 18
+--- !u!114 &2755715223544498162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613805141600235028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f27516276a7de4fafc3eea49824914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _tapSounds: 0
+  _buttonClickedEvent:
+    UnityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5132649789909793769}
+          m_TargetAssemblyTypeName: PowerUpButton, Assembly-CSharp
+          m_MethodName: OnPowerUpButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1101853894074560813
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +734,8 @@ GameObject:
   - component: {fileID: 548330983048691616}
   - component: {fileID: 4444809401633984947}
   - component: {fileID: 130104741150072372}
+  - component: {fileID: 2919618497096607303}
+  - component: {fileID: 3734341353783993394}
   m_Layer: 5
   m_Name: PowerUpButton3
   m_TagString: Untagged
@@ -772,6 +844,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2919618497096607303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838118260873377322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a3f9fe43427594197630ca8804aa2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerType: 2
+  _powerPrice: 18
+  _powerImg: {fileID: 21300000, guid: 5a63a015c9c88924ea5ece281acc69aa, type: 3}
+  _powerName: {fileID: 21300000, guid: aaf9271a7f92feb47937f2940fa064eb, type: 3}
+  _unlocked: 0
+  _levelToUnlock: 8
+--- !u!114 &3734341353783993394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838118260873377322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f27516276a7de4fafc3eea49824914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _tapSounds: 0
+  _buttonClickedEvent:
+    UnityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2919618497096607303}
+          m_TargetAssemblyTypeName: PowerUpButton, Assembly-CSharp
+          m_MethodName: OnPowerUpButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3561749740135597049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1459,8 @@ GameObject:
   - component: {fileID: 6769030189637482157}
   - component: {fileID: 4084027287769349578}
   - component: {fileID: 4807649258476104867}
+  - component: {fileID: 782594502534640335}
+  - component: {fileID: 1577888082393270115}
   m_Layer: 5
   m_Name: PowerUpButton4
   m_TagString: Untagged
@@ -1447,6 +1569,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &782594502534640335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568320546538731042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a3f9fe43427594197630ca8804aa2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerType: 3
+  _powerPrice: 18
+  _powerImg: {fileID: 21300000, guid: 233a1d8b37f39534780c6bfc2b2e599f, type: 3}
+  _powerName: {fileID: 0}
+  _unlocked: 0
+  _levelToUnlock: 5
+--- !u!114 &1577888082393270115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568320546538731042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f27516276a7de4fafc3eea49824914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _tapSounds: 0
+  _buttonClickedEvent:
+    UnityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UIPopupBehaviourPause, Assembly-CSharp
+          m_MethodName: OnRetryButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6820334119812681965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,8 +1682,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5016412299950852061}
+  m_Children: []
   m_Father: {fileID: 80427102384561880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1533,81 +1702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b6fb1f68255f647b22113aa7ed6995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7859838562333794319
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5016412299950852061}
-  - component: {fileID: 5950510254984295689}
-  - component: {fileID: 1593249888110339877}
-  m_Layer: 5
-  m_Name: GameBoard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &5016412299950852061
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859838562333794319}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2000907357050519288}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 309.76}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5950510254984295689
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859838562333794319}
-  m_CullTransparentMesh: 1
---- !u!114 &1593249888110339877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859838562333794319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c29c9afac9cb9d64b90356cf552ef84e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8020214742053003558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1923,8 @@ GameObject:
   - component: {fileID: 8752582005993335241}
   - component: {fileID: 5830715281448201868}
   - component: {fileID: 3732229022433498644}
+  - component: {fileID: 8438757461112291629}
+  - component: {fileID: 5583032110456364855}
   m_Layer: 5
   m_Name: PowerUpButton1
   m_TagString: Untagged
@@ -1937,3 +2033,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8438757461112291629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8358741288905875888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a3f9fe43427594197630ca8804aa2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerType: 0
+  _powerPrice: 18
+  _powerImg: {fileID: 21300000, guid: 5022a3a736bad9b43b067fa4f1d3bd9d, type: 3}
+  _powerName: {fileID: 21300000, guid: f5aae7830e693024db6e9276bb103f3d, type: 3}
+  _unlocked: 0
+  _levelToUnlock: 3
+--- !u!114 &5583032110456364855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8358741288905875888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f27516276a7de4fafc3eea49824914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _tapSounds: 0
+  _buttonClickedEvent:
+    UnityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8438757461112291629}
+          m_TargetAssemblyTypeName: PowerUpButton, Assembly-CSharp
+          m_MethodName: OnPowerUpButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

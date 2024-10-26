@@ -9,7 +9,12 @@ public partial class MainMenu
     private TextMeshProUGUI _coinsText;
 
     public TextMeshProUGUI CoinsText => _coinsText;
-    
+
+    public void SetCoinText(string text)
+    {
+        CoinsText.text = text;
+    }
+
     public void OnSettingsButton()
     {
         var popup = GM.Instance.Popups.GetPopup<UIPopupBehaviourSettings>(out var behaviour); ;
@@ -26,31 +31,28 @@ public partial class MainMenu
 
     public void OnPlayButton()
     {
-        Log.Info($"Start game request is called");
-        RequestGameStart();
+        Log.Info($"Start game");
+        GM.Instance.RequestGoTo(Screen.GAMEPLAY);
     }
 
-    public void ShowMainMenu()
+    public void Deactivate()
     {
-        Log.Info($"Main menu {name} should show");
-
-        gameObject.SetActive(true);
-        AudioManager.Instance.PlayMusic(LibraryMusics.Menu);
-    }
-
-    private void HideMainMenu()
-    {
-        Log.Info($"Main menu {name} should hide");
-
         gameObject.SetActive(false);
     }
 
-    private void RequestGameStart()
+    public void Activate()
     {
-        // Loading screen
+        gameObject.SetActive(true);
+        GM.Instance.AudioManager.PlayMusic(LibraryMusics.Menu);
+    }
 
-        GM.Instance.MainGame.StartGame();
+    public void PrepareDeativate()
+    {
+        // Do nothing
+    }
 
-        HideMainMenu();
+    public void PrepareActivate()
+    {
+        // Do nothing
     }
 }

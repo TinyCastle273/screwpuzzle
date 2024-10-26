@@ -16,5 +16,6 @@ public enum PowerUpSounds
 {
     Return = 0,
     Replay,
-    Drill
+    Drill,
+    Hammer
 }

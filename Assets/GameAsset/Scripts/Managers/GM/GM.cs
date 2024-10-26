@@ -15,43 +15,50 @@ public partial class GM : MonoManagerBase
     [SerializeField] private PopupManager _popupManager;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private MainGameManager _mainGameManager;
+    [SerializeField] private MainGameHUD _mainHUD;
     [SerializeField] private AudioManager _audioManager;
+    private PlayerManager _playerManager;
 
     private List<IIntializable> _primaryManagers;
     private List<IIntializable> _secondaryManagers;
 
     // Manager accessors
+    public PlayerManager Player => _playerManager;
     public LoadingScreen Loading => _loadingScreen;
     public MainGameManager MainGame => _mainGameManager;
     public AudioManager AudioManager => _audioManager;
     public PopupManager Popups => _popupManager;
     public MainMenu MainMenu => _mainMenu;
+    public MainGameHUD MainHUD => _mainHUD;
 
     private void Awake()
     {
         Instance = this;
         Application.targetFrameRate = -1;
         Logger.ShouldLog = _shouldLog;
+
+        _playerManager = new PlayerManager();
     }
 
     private void Start()
     {
         _primaryManagers = new List<IIntializable>()
         {
+            _playerManager,
+        };
+
+        _secondaryManagers = new List<IIntializable>()
+        {    
             MainGame,
             AudioManager,
             Popups,
             MainMenu,
-        };
-
-        _secondaryManagers = new List<IIntializable>()
-        {
+            _mainHUD
         };
 
         Initialize();
 
         // temporary
-        MainMenu.ShowMainMenu();
 
     }
 

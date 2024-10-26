@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -12,7 +13,7 @@ public enum GameState
     COMPLETED,
 }
 
-public partial class MainGameManager 
+public partial class MainGameManager
 {
     [Header("Params")]
     [SerializeField] public Sprite selectedScrew;
@@ -20,7 +21,7 @@ public partial class MainGameManager
     [SerializeField] private TextMeshProUGUI _timePanel;
 
     [Header("Levels")]
-    [SerializeField] 
+    [SerializeField]
     private LevelInfo levelInfo;
 
     [SerializeField]
@@ -29,8 +30,8 @@ public partial class MainGameManager
     public static MainGameManager Instance;
 
     private GameObject currentLevel;
-    private int currentLevelIndex;
     private GameObject nextLevel;
+    private int currentLevelIndex;
 
     private string levelText;
     private string timeText;
@@ -74,6 +75,8 @@ public partial class MainGameManager
         currentLevel = nextLevel;
         nextLevel = levelInfo.GetLevel(currentLevelIndex);
 
+        GM.Instance.MainHUD.AddCoins(5);
+
         StartGame();
     }
 
@@ -104,11 +107,19 @@ public partial class MainGameManager
         GameState = GameState.PLAYING;
 
         ResetTimer();
+        GM.Instance.MainHUD.CheckUnlockPowerUp(currentLevelIndex);
     }
 
     public void SaveGameLevel()
     {
         Log.Info($"Saving player progress");
+        Log.Warn($"Feature currently not implemented!!!");
+
+    }
+
+    public void LoadGameLevel()
+    {
+        Log.Info($"Loading player progress");
         Log.Warn($"Feature currently not implemented!!!");
     }
 
@@ -177,6 +188,8 @@ public partial class MainGameManager
 
         if (isWin)
         {
+            //GM.Instance.Player.SetLevelAsComplete("" + currentLevelIndex, (int) timer);
+
             var popup = GM.Instance.Popups.GetPopup<PopupBehaviourWin>(out var behaviour);
 
             behaviour.SetWinMode(WinMode.NORMAL, isWin);
@@ -191,18 +204,29 @@ public partial class MainGameManager
         }
     }
 
-    public void ReturnMainMenu()
+    public void PrepareDeactivate()
     {
-        Log.Info($"Return to menu request called");
-
-        GameState = GameState.NONE;
-
-        // TODO:
-        // Save level
+        // Save game data
         SaveGameLevel();
         CloseLevel();
 
-        // temporary
-        GM.Instance.MainMenu.ShowMainMenu();
+        GameState = GameState.NONE;
+    }
+
+    public void PrepareActivate()
+    {
+        // Load game data
+        LoadGameLevel();
+        StartGame();
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
     }
 }
